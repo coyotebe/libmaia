@@ -70,11 +70,11 @@ void MaiaXmlRpcClient::setUserAgent(QString userAgent) {
 }
 
 QNetworkReply* MaiaXmlRpcClient::call(QString method, QList<QVariant> args,
-							QObject* responseObject, const char* responseSlot,
-							QObject* faultObject, const char* faultSlot) {
+                            QObject* responseObject, const char* responseSlot,
+                            QObject* faultObject, const char* faultSlot) {
 	MaiaObject* call = new MaiaObject(this);
-	connect(call, SIGNAL(aresponse(QVariant &, QNetworkReply *)), responseObject, responseSlot);
-	connect(call, SIGNAL(fault(int, const QString &, QNetworkReply *)), faultObject, faultSlot);
+    connect(call, SIGNAL(aresponse(QVariant &, QNetworkReply *)), responseObject, responseSlot);
+    connect(call, SIGNAL(fault(int, const QString &, QNetworkReply *)), faultObject, faultSlot);
 
 	QNetworkReply* reply = manager.post( request,
 		call->prepareCall(method, args).toUtf8() );
